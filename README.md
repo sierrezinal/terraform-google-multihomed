@@ -149,3 +149,6 @@ PING ipfs.io (209.94.78.80) 56(84) bytes of data.
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 19.155/19.155/19.155/0.000 ms
 ```
+
+Et voilà !
+¶
