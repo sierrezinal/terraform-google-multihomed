@@ -1,5 +1,7 @@
 export TF_VAR_org_id=111111111111
 export TF_VAR_billing_account=000000-000000-000000
-export TF_CREDS=~/.gcloud/${USER}-admin1.json
+export TF_ADMIN=${USER}-tfroot
+export TF_CREDS=~/.gcloud/${USER}-tfroot.json
+export TF_SVCAC=tfadmin
 export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
 export GOOGLE_PROJECT=${TF_ADMIN}

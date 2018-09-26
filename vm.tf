@@ -1,6 +1,6 @@
 resource "google_compute_instance" "vm" {
   project                   = "${google_project.proj.project_id}"
-  name                      = "twonics"
+  name                      = "duanics"
   machine_type              = "f1-micro"
   zone                      = "${var.region_zone}"
   allow_stopping_for_update = true
@@ -17,6 +17,8 @@ resource "google_compute_instance" "vm" {
 
   tags = ["multihomed"]
 
+  metadata_startup_script = "${file("scripts/setup.sh")}"
+
   network_interface {
     subnetwork = "${google_compute_subnetwork.subnetwork1.self_link}"
 
@@ -32,6 +34,8 @@ resource "google_compute_instance" "vm" {
       // Ephemeral IP
     }
   }
+
+  depends_on = ["google_project_services.services1", "google_compute_network.heretic"]
 }
 
 output "ip1" {

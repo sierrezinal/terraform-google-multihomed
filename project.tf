@@ -1,3 +1,9 @@
+resource "random_pet" "pid" {
+  keepers = {
+    proj_id = "${var.projectid}"
+  }
+}
+
 provider "google" {
   region      = "${var.region}"
   credentials = "${file("${var.credentials_file_path}")}"
@@ -5,8 +11,8 @@ provider "google" {
 }
 
 resource "google_project" "proj" {
-  name            = "Two Network Interfaces"
-  project_id      = "tf-2interfaces"
+  name            = "Dual nics project"
+  project_id      = "dual-nics-${random_pet.pid.id}"
   billing_account = "${var.billing_account_id}"
   org_id          = "${var.org_id}"
 }
@@ -28,6 +34,23 @@ resource "google_project_iam_binding" "iam1" {
   members = [
     "serviceAccount:${google_project.proj.number}-compute@developer.gserviceaccount.com",
     "serviceAccount:${google_project.proj.number}@cloudservices.gserviceaccount.com",
+    "user:${var.owner}",
+  ]
+
+  depends_on = ["google_project_services.services1"]
+}
+
+resource "google_project_iam_binding" "iam2" {
+  project = "${google_project.proj.project_id}"
+  role    = "roles/owner"
+
+  lifecycle {
+    ignore_changes = [
+      "members",
+    ]
+  }
+
+  members = [
     "user:${var.owner}",
   ]
 
