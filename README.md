@@ -1,3 +1,9 @@
+## Goal
+
+Provision a multihomed ubuntu VM with nics in 2 VPCs.
+
+![network diagram](assets/dual-nics.png)
+
 ## Preconditions
 
 * You are logged in as `auser@example.com` (the admin for the domain `example.com` for your the organization with orgid `111111111111`.
