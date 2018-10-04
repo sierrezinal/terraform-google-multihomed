@@ -141,12 +141,22 @@ PING ipfs.io (209.94.78.78) from 10.138.0.2 ens5: 56(84) bytes of data.
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 19.147/19.147/19.147/0.000 ms
 
+ $ ip route get 209.94.78.78 oif ens5
+209.94.78.78 via 10.138.0.1 dev ens5  src 10.138.0.2
+    cache
+
+
  $ ping -I ens4 -c 1 ipfs.io
 PING ipfs.io (209.94.78.80) from 10.5.0.2 ens4: 56(84) bytes of data.
 64 bytes from 209.94.78.80: icmp_seq=1 ttl=52 time=19.3 ms
 --- ipfs.io ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 19.377/19.377/19.377/0.000 ms
+
+ $ ip route get 209.94.78.80 oif ens4
+209.94.78.80 via 10.5.0.1 dev ens4  src 10.5.0.2
+    cache
+
 
  $ ping -c 1 ipfs.io
 PING ipfs.io (209.94.78.80) 56(84) bytes of data.
